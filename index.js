@@ -16,12 +16,13 @@ app.use(express.static('dist'));
 
 
 app.post('/api/createdns', async (req, res) => {
+
     const nameOutput = await exec(`npx -p @govtechsg/open-attestation-cli open-attestation dns txt-record create --address ${req.body.documentStoreAddress} --network-id ${req.body.networkID}`)
     const result = extractValues(nameOutput.stdout.trim());
     console.log(result);
     res.json(result)
 })
-const port = 5000
+const port = 5002
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
